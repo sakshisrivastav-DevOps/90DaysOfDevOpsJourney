@@ -45,33 +45,89 @@ systemctl start|stop|status
 **Process State**
 
 Running (R) – Executing on CPU
+
 Sleeping (S) – Waiting for I/O or event
+
 Uninterruptible Sleep (D) – Waiting on disk I/O
+
 Stopped (T) – Paused (e.g., via Ctrl+Z)
+
 Zombie (Z) – Finished execution but not reaped by parent
 
-**dig**
+**dig** DNS lookup
 
-Advanced DNS queries (better than nslookup)
+Advanced DNS queries.
+dig google.com
+dig google.com +short
 
 **ss**
 
-Modern replacement for netstat
+Modern replacement for netstat.Fast socket and network inspection
+List listening ports:
 
-Fast socket and network inspection
+##ss -lnt##
 
-**lsof**
+Show all TCP connections:
 
-See which process is using a file or port
+**ss -ant**
+
+Check which process is using a port:
+
+**ss -lntp**
+
 
 **strace**
 
 Debug what a program is doing at the syscall level
+strace – Trace system calls of a process
 
+Used for debugging application issues.
+
+Trace a command:
+
+strace ls
+
+Trace a running process (PID):
+
+strace -p 1234
+
+Save output to a file:
+
+strace -o trace.log curl google.com
 **watch**
 
-Run a command repeatedly and see live changes
+Run a command repeatedly and see live changes. Used to monitor changes in real time.
 
+**Monitor disk usage every 2 seconds:**
+
+watch df -h
+
+Monitor running processes:
+
+watch ps aux
 Example: watch df -h
 
 Scheduler decides when and how long a process runs
+
+
+lsof
+
+Used to see which process is using a file, directory, or network port.
+
+Check which process is using a port:
+
+lsof -i :8080
+
+
+List open files by a specific process (PID):
+
+lsof -p 1234
+
+
+Find which process is using a file:
+
+lsof /var/log/syslog
+
+List all network connections:
+
+lsof -i
